@@ -1,0 +1,98 @@
+<div class="row-2">
+	<div class="col-md-6 col-md-offset-1">
+			<div class="see_thru">
+				<h2>Want to learn more about your state?</h2>
+				<p>Find out who controls your elected officials:</p>
+				<div>
+					<%= form_tag index_path do %>
+						<%= select_tag :state, options_for_select(@states), prompt: "Select your state" %>						
+					<div align= right>
+						<%= submit_tag "Get Political!", class: "btn btn-warning" %>
+					<% end %> <br />				
+					powered by the <a href="http://sunlightfoundation.com/" target="_blank"> Sunlight Foundation API.</a>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+
+<% if @result != nil %>
+
+<div class="col-md-4">
+	<div class="well">
+		<div class ="pill_heads">
+			<h4>The state of <%= @state %> recieved </h4>
+			<h1><%= number_to_currency(@state_total) %></h1>
+			<h4> in campaign contributions in 2015.<h4>	
+			<h6>This selection respresents</h6> 
+			<h2><%= number_to_currency(@total) %> </h2>	
+			<h6> of that amount. </h6>
+		</div>
+	</div>
+</div>
+
+<div style="position: relative; left: 22px; top: -60px;">
+	<%= form_tag index_path do %>
+		<%= select_tag :contributions, options_for_select(@contributions), prompt: "Money", class: "btn btn-success custom" %>
+		<%= select_tag "politician", options_for_select(@politicians), prompt: "Who?", class: "btn btn-warning custom" %>
+		
+		<%= select_tag :party, options_for_select(@parties), prompt: "Party!", class: "btn btn-default custom" %>
+		<%= select_tag :in_state, options_for_select(@in_states), prompt: "Where?", class: "btn btn-success custom" %>
+		<%= select_tag "giver", options_for_select(@givers), prompt: "Givers!", class: "btn btn-primary custom" %>
+		<%= hidden_field_tag :state, @state %>
+		<%= submit_tag "Are you ready?", class: "btn btn-inverse" %>
+	<% end %>
+</div>
+
+
+<br />	
+
+<% @result.each do |data| %>
+	<div class="row-2">
+		<div class="col-md-6">
+			<div class="check">						
+					<div class="check_header">
+					<h6>	<br />
+					From: <%= data["contributor_name"] %> 
+						<% if data["contributor_occupation"] != "" %>
+						<%= data["contributor_occupation"].downcase.capitalize %>
+						<% end %><br />
+						
+						<% if data["contributor_city"] == "" %>
+							No address listed.
+						<% else %>
+							<%= data["contributor_city"] %>, 
+								<% if data["contributor_state"] == "" %>
+								<%= @state %>
+								<% end %>
+								<%= data["contributor_state"] %> 
+							<% end %>
+						</h6>
+					</div>
+					<div class="check_number">
+					<strong><%= @check_number %></strong>
+					</div>	
+					<div class="date">
+					<% if data["date"] != nil %>
+						<%= data["date"] %>
+					<% else %>
+						no date provided
+					<% end %>				
+					</div>
+					<div class="check_to">
+					<h5><%= data["recipient_name"] %> </h5>
+					</div>
+					<div class="check_amount">
+					<h4><%= number_to_currency(data["amount"]) %></h4>
+					</div>					
+
+					<div class="space_holder">
+					<br />
+					</div>
+
+				</div>	
+		</div>
+	</div>
+	<% end %>
+<% end %>
+
