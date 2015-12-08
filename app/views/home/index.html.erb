@@ -1,18 +1,20 @@
 <div class="row-2">
-	<div class="col-md-6 col-md-offset-1">
+	<div class="col-md-7 col-md-offset-1">
+		<div class="well">
 			<div class="see_thru">
 				<h2>Want to learn more about your state?</h2>
 				<p>Find out who controls your elected officials:</p>
 				<div>
 					<%= form_tag index_path do %>
-						<%= select_tag :state, options_for_select(@states), prompt: "Select your state" %>						
+						<%= select_tag :state, options_for_select(@states), prompt: "Select your state", class: "btn btn-success" %>						
 					<div align= right>
-						<%= submit_tag "Get Political!", class: "btn btn-warning" %>
+						<%= submit_tag "Get Political!", class: "btn btn-warning circle" %>
 					<% end %> <br />				
 					powered by the <a href="http://sunlightfoundation.com/" target="_blank"> Sunlight Foundation API.</a>
 					</div>
 				</div>
 			</div>
+		</div>
 	</div>
 </div>
 
@@ -27,33 +29,45 @@
 			<h6>This selection respresents</h6> 
 			<h2><%= number_to_currency(@total) %> </h2>	
 			<h6> of that amount. </h6>
+
+		
+
 		</div>
 	</div>
 </div>
 
-<div style="position: relative; left: 22px; top: -60px;">
-	<%= form_tag index_path do %>
-		<%= select_tag :contributions, options_for_select(@contributions), prompt: "Money", class: "btn btn-success custom" %>
-		<%= select_tag "politician", options_for_select(@politicians), prompt: "Who?", class: "btn btn-warning custom" %>
-		
-		<%= select_tag :party, options_for_select(@parties), prompt: "Party!", class: "btn btn-default custom" %>
-		<%= select_tag :in_state, options_for_select(@in_states), prompt: "Where?", class: "btn btn-success custom" %>
-		<%= select_tag "giver", options_for_select(@givers), prompt: "Givers!", class: "btn btn-primary custom" %>
-		<%= hidden_field_tag :state, @state %>
-		<%= submit_tag "Are you ready?", class: "btn btn-inverse" %>
-	<% end %>
-</div>
 
+
+
+
+
+	<div class="container">
+		<div class="row">
+	        <div class="col-md-6">
+	        	<div class="btn-placement">
+				<%= form_tag index_path do %>
+				<%= select_tag :contributions, options_for_select(@contributions), prompt: "Money!", class: "btn btn-primary custom" %>
+				<%= select_tag "politician", options_for_select(@politicians), prompt: "Who?", class: "btn btn-primary custom" %>
+				<%= select_tag :party, options_for_select(@parties), prompt: "Party!", class: "btn btn-primary custom" %>
+				<%= select_tag :in_state, options_for_select(@in_states), prompt: "Where?", class: "btn btn-primary custom" %>
+				<%= select_tag "giver", options_for_select(@givers), prompt: "Givers!", class: "btn btn-primary custom" %>
+				<%= hidden_field_tag :state, @state %>
+				<%= submit_tag "Ready?", class: "btn btn-primary custom" %>
+			<% end %>
+	        </div>   
+		</div>
+	</div>
+</div>
 
 <br />	
 
 <% @result.each do |data| %>
-	<div class="row-2">
+	<div class="row">
 		<div class="col-md-6">
 			<div class="check">						
 					<div class="check_header">
 					<h6>	<br />
-					From: <%= data["contributor_name"] %> 
+					From: <%= data["contributor_name"] %>
 						<% if data["contributor_occupation"] != "" %>
 						<%= data["contributor_occupation"].downcase.capitalize %>
 						<% end %><br />
@@ -74,16 +88,21 @@
 					</div>	
 					<div class="date">
 					<% if data["date"] != nil %>
-						<%= data["date"] %>
+						<%= local_date(data["date"]) %>
 					<% else %>
 						no date provided
 					<% end %>				
 					</div>
+					
+
+
+
 					<div class="check_to">
-					<h5><%= data["recipient_name"] %> </h5>
+					<h4><%= data["recipient_name"] %> </h4>
 					</div>
+
 					<div class="check_amount">
-					<h4><%= number_to_currency(data["amount"]) %></h4>
+					<h3><%= number_to_currency(data["amount"]) %></h3>
 					</div>					
 
 					<div class="space_holder">

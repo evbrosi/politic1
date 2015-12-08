@@ -3,7 +3,6 @@ class HomeController < ApplicationController
 		@states = %w(HI AK CA OR WA ID UT NV AZ NM CO WY MT ND SD NE KS OK TX LA AR MO IA MN WI IL IN MI OH KY TN MS AL GA FL SC NC VA WV DE MD PA NY NJ CT RI MA VT NH ME DC PR)
 		@states.sort!
   		
-
   	if params[:state] != nil
 
   		@state = params[:state]
@@ -19,14 +18,11 @@ class HomeController < ApplicationController
 
 		@result = results
 
-		@check_number=1
+		@check_number = 0
 		@state_total = 0
 		@result.each do |r|
 			@state_total += r["amount"].to_f
-			@check_number+=1
-
-		
-
+			@check_number += 1
 		end
 
 		@state_check=[]
@@ -48,7 +44,6 @@ class HomeController < ApplicationController
 
 		@politician = params[:politicians]
 
-
 		@givers = []
 		@result.each do |r|
 			@givers.push(r["contributor_name"])
@@ -56,7 +51,6 @@ class HomeController < ApplicationController
 		@givers.uniq!
 
 		@giver = params[:givers]
-
 
 		if params[:contributions].present?
 			@temp_arr = []
@@ -78,8 +72,7 @@ class HomeController < ApplicationController
 						@temp_arr.push(r)
 					end
 				elsif params[:in_state] == "no" && (params[:state] != r["contributor_state"] || r["contributor_city"] == "") 
-						@temp_arr.push(r)
-					
+						@temp_arr.push(r)			
 				end
 			end
 
@@ -121,9 +114,8 @@ class HomeController < ApplicationController
 
 		@total = 0
 		@result.each do |r|
-			@total += r["amount"].to_f
+			@total += r["amount"].to_f		
 		end
 	end
 end
 end
-

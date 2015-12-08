@@ -17,6 +17,50 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.circle {
+	border: .5em solid 57925;
+	font-size: 17px;
+	line-height: 1.1em;
+	color: #ffffff;
+	background-color: #71216;
+	margin: auto;
+	border-radius: 50%;
+	height: 120px;
+	width: 120px;
+	position: relative;
+}
+
+.circle:hover {
+	color:#ffffff;
+    background-color: #e84d0e;
+	text-decoration: none;
+	border-color: #ff7536;
+}
+
+.custom {
+	border: .5em solid 57925;
+	font-size: 1em;
+	line-height: 1.1em;
+	color: #87CEFA;
+	background-color: #87CEFA;
+	margin: auto;
+	height: 50px;
+	width: 80px;
+	position: relative;
+}
+
+.custom:hover {
+	color:#ffffff;
+    background-color: #e84d0e;
+	text-decoration: none;
+	border-color: #ff7536;
+}
+
+.btn-placement {
+	position: relative;
+	margin-left: 10px;
+	margin-top: 10px;
+}
 
 .pill_heads {
 	text-align: center;
@@ -28,7 +72,7 @@ background: #696969;
 }
 
 .btn-success {
-background: #b6c406;
+background: green;
     color: #ffffff;
 }
 
@@ -41,6 +85,8 @@ background: #BCC6CC;
 	background: url("check.jpeg") no-repeat;
 	position: relative;
 	background-size: 600px 300px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .check_header {
@@ -52,19 +98,19 @@ background: #BCC6CC;
 .check_to {
 	position: relative; 
 	margin-left: 200px;
-    margin-top: 67px
+    margin-top: 64px
 }
 
 .check_amount {
 	position: relative;
-	margin-left: 430px;
-	margin-top: -30px;
+	margin-left: 400px;
+	margin-top: -46px;
 }
 
 .date {
 	position: relative;
-	margin-top: 5px;
-	margin-left: 460px;
+	margin-top: 22px;
+	margin-left: 375px;
 }
 
 .memo_district {
@@ -85,22 +131,38 @@ background: #BCC6CC;
 }
 
 
-.custom {
-	width: 60px;
-  	height: 60px;
-  	line-height: 0px; /* adjust line height to align vertically*/
-  	padding: 6px 0;
-  	border-radius: 50%;
-}
+
 
 body {
-	background: url("sunny.jpg");
-	opacity: 50%;
+	background: url("checkers.jpeg");
 }
 
 .see_thru {
 	opacity: 30%;
+	margin-top: 20px;
 }
+
+.buttons {
+	display:block;
+    width:200px;
+    height:200px;
+    line-height:70px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color:#f5f5f5;
+    background: #464646;
+    box-shadow: 0 0 3px gray;
+}
+
+.buttons img {
+    display: block;
+    width: 76%;
+    padding: 12%;
+    height: auto;
+}
+
+
+
 
 @media screen and (min-width: px) {
 
